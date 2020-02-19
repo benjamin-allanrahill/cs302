@@ -69,13 +69,44 @@ public class Main {
 		//Your code here!//
 		///////////////////
 
+
 		return closestPair;
-
-
-
 
 	}
 
+	public static School ClosestPointsRecursive(ArrayList<School> sLx, ArrayList<School> sLy) {
+		// Will be the true recursive function that finds the closest points 
+		if (sLx.length() <= 3) {
+			double minDist == Double.POSITIVE_INFINITY;
+			for (int i = 0; i <sLx.length(); i++) {
+				for(int j = 0; j <sLx.length(); j++){
+					sArr = School[];
+					dist = CalcDistance([school, sLx[]])
+				}
+			}
+			
+		} else {
+
+		}
+	}
+	
+	public static Integer CalcDistance(School[] sArr) {
+		// Function to calculate the distance between schools
+		
+		// find difference in coords
+		double xDist = sArr[0].getX() - sArr[1].getX();
+		double yDist = sArr[0].getY() - sArr[1].getY();
+		
+		// square quantities
+		double xS = Math.pow(xDist, 2);
+		double yS = Math.pow(yDist, 2);
+
+		// calc distance
+		double distance = Math.sqrt((xS + yS));
+
+		return distance;
+
+	}
 	
 
 }
