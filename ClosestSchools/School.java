@@ -43,8 +43,12 @@ public class School {
 		return xpos;
 	}
 
-	public double getY(){
+	public double getY() {
 		return ypos;
+	}
+	
+	public void setName(String newName) {
+		this.name = newName;
 	}
 
 	@Override
