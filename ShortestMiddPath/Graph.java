@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 import java.lang.Math;
+import java.security.KeyStore.Entry;
 import java.io.File;
 import java.util.Comparator;
 import java.util.ArrayList;
@@ -93,15 +94,49 @@ public class Graph {
     public Double[][] ShortestDistance(Integer startNode){
     	// This method should create the array storing the objective function values of subproblems used in Bellman Ford.
 
-    	//You need to write this method!!
+		//You need to write this method!!
 
-		Double[][] dpArray=new Double[1][1];//You should probably do a different initialization here
+		
+
+		// this.adjList.entrySet().forEach(entry -> {
+		// 	System.out.println(entry.getKey() + " : " + entry.getValue());
+		// });
+		// this.nodeDict.entrySet().forEach(entry -> {
+		// 	System.out.println(entry.getKey() + " : " + entry.getValue());
+		// });
+		// System.out.println(nodeDict.size());
+		// System.out.println(nodeDict.get(startNode));
+		
+		
+		Double[][] dpArray = new Double[nodeDict.size()][nodeDict.size()];//You should probably do a different initialization here
+		
+		for (int i = 0; i < dpArray.length; i++) {
+			dpArray[i][0] = Double.MAX_VALUE;
+		}
+		dpArray[this.nodeDict.get(startNode)][0] = 0.0;
+
+		for (int i = 1; i < this.nodeDict.size(); i++) {
+			for (Integer node : this.nodeDict.keySet()) {
+				int v = this.nodeDict.get(node);
+				dpArray[v][i] = dpArray[v][i - 1];
+				for (Road road : this.adjList.get(node)) {
+					if ((dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles) > dpArray[v][i]) {
+						dpArray[v][i] = dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles;
+					}
+					
+				};
+			}
+		}
+
+		
 		return dpArray;
     }
 
     public void ShortestPath(Integer endNode, Double[][] dpArray){
 		// This method should work backwards through the array you created in ShortestDistance and output the 
 		// sequence of streets you should take to get from your starting point to your ending point.
+
+		
 
 		System.out.println("You need to write some code!");
 	}			
