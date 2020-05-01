@@ -9,6 +9,7 @@ package ShortestMiddPath;
 
 import java.io.File;
 import java.util.Scanner;
+
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -120,7 +121,7 @@ public class Graph {
 				int v = this.nodeDict.get(node);
 				dpArray[v][i] = dpArray[v][i - 1];
 				for (Road road : this.adjList.get(node)) {
-					if ((dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles) > dpArray[v][i]) {
+					if ((dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles) < dpArray[v][i]) {
 						dpArray[v][i] = dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles;
 					}
 					
@@ -136,7 +137,27 @@ public class Graph {
 		// This method should work backwards through the array you created in ShortestDistance and output the 
 		// sequence of streets you should take to get from your starting point to your ending point.
 
-		
+		int i = this.nodeDict.size() - 1;
+		int v = endNode;
+		ArrayList<String> streetList = new ArrayList<>();
+
+		while (i > 0) {
+			System.out.println(dpArray[this.nodeDict.get(v)][i]);
+			if (dpArray[this.nodeDict.get(v)][i] != dpArray[this.nodeDict.get(v)][i - i]) {
+				for (Road road : this.adjList.get(v)) {
+					if ((dpArray[this.nodeDict.get(road.endNode)][i - 1] + road.miles) == dpArray[this.nodeDict.get(v)][i]) {
+						streetList.add(0, road.name);
+						v = road.endNode;
+						break;
+					}
+				}
+				;
+			}
+			i--;
+		}
+
+		System.out.println(streetList);
+
 
 		System.out.println("You need to write some code!");
 	}			
